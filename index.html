@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoShijang - Link in Bio</title>
+    <style>
+        /* --- Import Custom Font --- */
+        @font-face {
+            font-family: 'BabyBoo';
+            src: url('https://github.com/nicoluysm/my-font/raw/refs/heads/main/%E0%B8%AA%E0%B8%B3%E0%B9%80%E0%B8%99%E0%B8%B2%E0%B8%82%E0%B8%AD%E0%B8%87%20babyboo.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --bg-color: #eef7e9;
+            --main-green: #cde6b4;
+            --dark-green: #6b8e4e;
+            --white: #ffffff;
+            --pink-accent: #fdf2f5;
+            --pink-border: #f8bbd0;
+        }
+
+        body {
+            font-family: 'BabyBoo', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px 10px; /* ลด padding ซ้ายขวาของ body */
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+            color: #555;
+        }
+
+        /* --- Animation Background --- */
+        .bg-emojis {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .emoji {
+            position: absolute;
+            bottom: -50px;
+            font-size: 24px;
+            opacity: 0.4;
+            animation: floatUp 8s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.5; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- Container Layout --- */
+        .container {
+            width: 100%;
+            max-width: 480px; /* ขยายความกว้างจากเดิม 380px เป็น 480px */
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            border: 3px solid var(--main-green);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #bbb;
+        }
+
+        h1 { color: var(--dark-green); margin: 10px 0 5px; font-size: 32px; }
+        .subtitle { color: var(--dark-green); font-size: 18px; margin-bottom: 25px; }
+
+        /* --- Tags --- */
+        .tags-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+
+        .tag {
+            background: var(--white);
+            border: 2px solid var(--main-green);
+            padding: 4px 15px;
+            border-radius: 40px;
+            font-size: 15px;
+            color: var(--dark-green);
+            white-space: nowrap; /* ป้องกันแท็กตัดบรรทัด */
+        }
+
+        /* --- Card Sections --- */
+        .card {
+            background: var(--white);
+            border: 3px solid var(--main-green);
+            border-radius: 45px;
+            padding: 25px 20px; /* ปรับ padding ด้านในให้สมดุล */
+            margin-bottom: 25px;
+            text-align: left;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .card-title {
+            text-align: center;
+            font-size: 20px;
+            color: var(--dark-green);
+            margin-bottom: 15px;
+            border: 2px dashed var(--main-green);
+            border-radius: 20px;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            font-size: 17px;
+            border-bottom: 1px dashed #f0f0f0;
+            white-space: nowrap; /* บังคับให้ราคากับชื่ออยู่บรรทัดเดียวกัน */
+        }
+
+        /* --- Steps --- */
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.2;
+        }
+
+        .step-num {
+            background: var(--main-green);
+            color: white;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        /* --- Rules Section --- */
+        .rules-card {
+            background: var(--pink-accent);
+            border: 2.5px dashed var(--pink-border);
+            border-radius: 40px;
+            padding: 20px;
+            margin-bottom: 30px;
+            font-size: 15px;
+            text-align: left;
+        }
+
+        /* --- Footer Button --- */
+        .btn-cta {
+            background: var(--main-green);
+            color: var(--dark-green);
+            text-decoration: none;
+            display: block;
+            padding: 18px;
+            border-radius: 25px;
+            font-size: 20px;
+            transition: 0.3s;
+            box-shadow: 0 4px 0 #b2d681;
+        }
+
+        .btn-cta:active { transform: translateY(2px); box-shadow: none; }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg-emojis" id="emojiContainer"></div>
+
+    <div class="container">
+        <div class="profile-img">รูป</div>
+        <h1>HoShijang</h1>
+        <div class="subtitle">โฮชิรับทำป้าย ราคาเริ่มต้น 35 บาท</div>
+
+        <div class="tags-group">
+            <div class="tag">แนวเรียบ</div>
+            <div class="tag">เฮดน่ารัก</div>
+            <div class="tag">แนวเมฆนุ่มปุ๊กปิ๊ก</div>
+            <div class="tag">ป้ายเติมเกมบัดดี้คุณปุน</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">เรทราคางานป้าย</div>
+            <div class="price-row"><span>แนวเรียบ</span> <span>เริ่มต้น 35 บาท</span></div>
+            <div class="price-row"><span>แนวเฮดน่ารัก</span> <span>เริ่มต้น 45 บาท</span></div>
+            <div class="price-row"><span>ป้ายเติมเกมบัดดี้คุณปุน</span> <span>เริ่มต้น 45 บาท</span></div>
+            <div class="price-row"><span>แนวเมฆนุ่มปุ๊กปิ๊ก</span> <span>เริ่มต้น 79 บาท</span></div>
+            <div class="price-row"><span>งานเร่ง</span> <span>*2 ของราคางาน</span></div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">ขั้นตอนการสั่งงาน</div>
+            <div class="step-item"><div class="step-num">1</div> ดูตัวอย่างงาน จากนั้นบอกแนวที่ต้องการสั่งทำ</div>
+            <div class="step-item"><div class="step-num">2</div> เลือกของทำป้ายแล้วแคปส่งให้ทางร้าน</div>
+            <div class="step-item"><div class="step-num">3</div> บรีฟรายละเอียดข้อความต่างๆ</div>
+            <div class="step-item"><div class="step-num">4</div> ทางร้านจะคิดยอดให้ จากนั้นลูกค้ารอชำระเงิน</div>
+        </div>
+
+        <div class="rules-card">
+            <div style="text-align:center; font-size:18px; margin-bottom:10px;">เกี่ยวกับทางร้านและข้อตกลงต่างๆ</div>
+            <div style="line-height: 1.6;">
+                • ไม่มีคิวรองาน 4-8 ชั่วโมง / ติดคิวรอ 1-3 วัน<br>
+                • หากโอนแล้วต้องการยกเลิกงาน คืนเงิน 50% เท่านั้น<br>
+                • แก้หลังส่งงานบวกเพิ่มจุดละ 10-20 บาท ตามรายละเอียด
+            </div>
+        </div>
+
+        <a href="#" class="btn-cta">สั่งงาน / สอบถามทาง LINE</a>
+        <div style="height: 40px;"></div>
+    </div>
+
+    <script>
+        const container = document.getElementById('emojiContainer');
+        const emojis = ['🌿', '🌱', '☁️', '🫧', '✨'];
+        function createEmoji() {
+            const emoji = document.createElement('div');
+            emoji.classList.add('emoji');
+            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + 'vw';
+            const duration = Math.random() * 4 + 6; 
+            emoji.style.animationDuration = duration + 's';
+            container.appendChild(emoji);
+            setTimeout(() => { emoji.remove(); }, duration * 1000);
+        }
+        setInterval(createEmoji, 700);
+    </script>
+</body>
+</html>
